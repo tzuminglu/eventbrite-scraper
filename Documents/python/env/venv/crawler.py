@@ -1,6 +1,6 @@
 
 # 1. run this in command line: python3 -m ensurepip
-# 2. run /env/venv/bin/python3 -m pip install --upgrade pip
+# 2. run /Users/ming/Documents/python/env/venv/bin/python3 -m pip install --upgrade pip
 # 3. run pip install -r requirements.txt
 # 4. run python crawler.py
 # 5. git rm -r lib to remove lib or manually delete lib file before uploading to github
@@ -86,7 +86,7 @@ class SetEncoder(json.JSONEncoder):
 
 if __name__ == '__main__':
 
-    ### Multiprocessing ###
+    ### Multiprocessing ### (20 pages, 5.57s)
     event_ids = set()
     events = Events(20, event_ids)
     url_list = events.generate_urls()
@@ -97,17 +97,18 @@ if __name__ == '__main__':
     final_ids = set()
     for i in range(len(event_list)):
         final_ids = final_ids | event_list[i]
-    print(len(final_ids))
+    
     end = time.time()
     print(f'Multiprocessing Scraping time: %.2f seconds.' % (end - start))
+    print(f"Lehgth: %s" %len(final_ids))
 
-    ### Async ###
+    ### Async ### (20 pages, 2.49s)
     event_ids = set()
     a_Event = async_Event(20, event_ids)
     url_list = a_Event.generate_urls()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(a_Event.main())
-    print(len(event_ids))
+    print(f"Lehgth: %s" %len(event_ids))
     data_str = json.dumps(event_ids, cls=SetEncoder)
 
     f = open("eventbrite.json", "w")
