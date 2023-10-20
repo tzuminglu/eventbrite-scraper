@@ -6,7 +6,7 @@
 
 from multiprocessing import Pool
 import time
-from bs4 import BeautifulSoup
+import BeautifulSoup
 import asyncio
 import requests
 import sys
