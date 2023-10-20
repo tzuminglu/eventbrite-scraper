@@ -7,8 +7,12 @@ import sys
 from urllib import request
 import aiohttp
 import json
+import os
+
+path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(
-    "/Users/ming/Documents/python/env/venv/lib/python3.9/site-packages")
+    f"{path}/lib/python3.9/site-packages")
+
 
 class Events:
     def __init__(self, pages, event_set) -> None:
@@ -64,6 +68,7 @@ class async_Event(Events):
 
         time_difference = time.time() - start_time
         print(f'Async Scraping time: %.2f seconds.' % time_difference)
+
 
 class SetEncoder(json.JSONEncoder):
     def default(self, obj):
