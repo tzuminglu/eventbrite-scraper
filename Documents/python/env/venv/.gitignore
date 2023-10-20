@@ -7,3 +7,4 @@ env/venv/lib/
 ENV/
 env.bak/
 venv.bak/
+env/venv/lib/python3.9/site-packages
