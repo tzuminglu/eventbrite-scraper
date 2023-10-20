@@ -3,7 +3,7 @@
 .venv
 env/
 venv/
-lib/
+env/venv/lib/
 ENV/
 env.bak/
 venv.bak/
