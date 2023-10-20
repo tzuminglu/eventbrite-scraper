@@ -1,12 +1,13 @@
 
 # 1. run this in command line: python3 -m ensurepip
-# 2. run /Users/ming/Documents/python/env/venv/bin/python3 -m pip install --upgrade pip
+# 2. run /env/venv/bin/python3 -m pip install --upgrade pip
 # 3. run pip install -r requirements.txt
-# 4. git rm -r lib to remove lib or manually delete lib file before uploading to github
+# 4. run python crawler.py
+# 5. git rm -r lib to remove lib or manually delete lib file before uploading to github
 
 from multiprocessing import Pool
 import time
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import asyncio
 import requests
 import sys
@@ -87,7 +88,7 @@ if __name__ == '__main__':
 
     ### Multiprocessing ###
     event_ids = set()
-    events = Events(10, event_ids)
+    events = Events(20, event_ids)
     url_list = events.generate_urls()
 
     start = time.time()
@@ -102,7 +103,7 @@ if __name__ == '__main__':
 
     ### Async ###
     event_ids = set()
-    a_Event = async_Event(10, event_ids)
+    a_Event = async_Event(20, event_ids)
     url_list = a_Event.generate_urls()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(a_Event.main())
