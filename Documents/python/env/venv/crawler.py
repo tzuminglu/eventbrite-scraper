@@ -1,3 +1,9 @@
+
+# 1. run this in command line: python3 -m ensurepip
+# 2. run /Users/ming/Documents/python/env/venv/bin/python3 -m pip install --upgrade pip
+# 3. run pip install -r requirements.txt
+# 4. git rm -r lib to remove lib or manually delete lib file before uploading to github
+
 from multiprocessing import Pool
 import time
 from bs4 import BeautifulSoup

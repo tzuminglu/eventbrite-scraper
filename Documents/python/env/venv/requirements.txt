@@ -1,0 +1,7 @@
+beautifulsoup4
+multiprocess
+asyncio
+requests
+urllib3
+aiohttp
+json5
