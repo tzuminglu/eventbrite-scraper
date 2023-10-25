@@ -22,10 +22,10 @@ sys.path.append(
 
 
 class Events:
-    def __init__(self, pages, event_set) -> None:
+    def __init__(self, pages=10) -> None:
         self.pages = pages
         self.url = []
-        self.event_set = event_set
+        self.event_set = set()
 
     def generate_urls(self):
         for page in range(self.pages):
@@ -50,8 +50,8 @@ class Events:
 
 
 class async_Event(Events):
-    def __init__(self, pages, event_set) -> None:
-        super().__init__(pages, event_set)
+    def __init__(self, pages=10) -> None:
+        super().__init__(pages)
 
     async def scrape(self, url):
         async with aiohttp.ClientSession() as session:
@@ -86,36 +86,36 @@ class SetEncoder(json.JSONEncoder):
 
 if __name__ == '__main__':
 
-    ### Multiprocessing ### (20 pages, 5.57s)
-    event_ids = set()
-    events = Events(20, event_ids)
-    url_list = events.generate_urls()
+    # Multiprocessing ### (20 pages, 5.57s)
+    # event_ids = set()
+    # events = Events(20, event_ids)
+    # url_list = events.generate_urls()
 
-    start = time.time()
-    p = Pool(15)
-    event_list = p.map(events.scrape_url, url_list)
-    final_ids = set()
-    for i in range(len(event_list)):
-        final_ids = final_ids | event_list[i]
-    
-    end = time.time()
-    print(f'Multiprocessing Scraping time: %.2f seconds.' % (end - start))
-    print(f"Lehgth: %s" %len(final_ids))
+    # start = time.time()
+    # p = Pool(15)
+    # event_list = p.map(events.scrape_url, url_list)
+    # final_ids = set()
+    # for i in range(len(event_list)):
+    #     final_ids = final_ids | event_list[i]
 
-    ### Async ### (20 pages, 2.49s)
+    # end = time.time()
+    # print(f'Multiprocessing Scraping time: %.2f seconds.' % (end - start))
+    # print(f"Lehgth: %s" % len(final_ids))
+
+    # Async ### (20 pages, 2.49s)
     event_ids = set()
-    a_Event = async_Event(20, event_ids)
+    a_Event = async_Event()
     url_list = a_Event.generate_urls()
     loop = asyncio.get_event_loop()
     loop.run_until_complete(a_Event.main())
-    print(f"Lehgth: %s" %len(event_ids))
+    print(f"Lehgth: %s" % len(event_ids))
     data_str = json.dumps(event_ids, cls=SetEncoder)
 
-    f = open("eventbrite.json", "w")
-    f.write(str(data_str))
-    f.close()
-    p.terminate()
-    p.join()
+    # f = open("eventbrite.json", "w")
+    # f.write(str(data_str))
+    # f.close()
+    # p.terminate()
+    # p.join()
 
 
 # async def get_events(page):
