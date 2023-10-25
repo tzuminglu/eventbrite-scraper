@@ -1,0 +1,13 @@
+{
+  "name": "eventbrite-scraper",
+  "version": "1.0.0",
+  "description": "Python eventbrite scraper to obtain event-id",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
